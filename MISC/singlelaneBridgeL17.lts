@@ -33,15 +33,27 @@ CountEast[i:ID] = (east[ID].enter -> CountEast[i+1]
 					| when i==1 east[ID].exit -> SingleCarOnBridge).
 ||CheckCars = (Cars||SingleCarOnBridge).
 
+//Previous Brigde
+//Bridge = Bridge[0][0],
+//Bridge[nWest:T][nEast:T] = (
+//when (nWest == 0 && nEast<N) east[ID].enter -> Bridge[nWest][nEast + 1]
+//| when (nEast>0) east[ID].exit -> Bridge[nWest][nEast - 1]
+//| when (nEast==0 && nWest<N) west[ID].enter -> Bridge[nWest+1][nEast]
+//| when (nWest>0) west[ID].exit -> Bridge[nWest-1][nEast]
+//).
 
-Bridge = Bridge[0][0],
-Bridge[nWest:T][nEast:T] = (
-when (nWest == 0 && nEast<N) east[ID].enter -> Bridge[nWest][nEast + 1]
-| when (nEast>0) east[ID].exit -> Bridge[nWest][nEast - 1]
-| when (nEast==0 && nWest<N) west[ID].enter -> Bridge[nWest+1][nEast]
-| when (nWest>0) west[ID].exit -> Bridge[nWest-1][nEast]
-).
-
+Bridge = Bridge[0][0][0][0][0],
+Bridge[nWest:T][nEast:T][nWestReq:T][nEastReq:T][turn:TurnOpts] = (
+east[ID].request -> Bridge[nWest][nEast][nWestReq][nEastReq+1][turn]
+| west[ID].request -> Bridge[nWest][nEast][nWestReq+1][nEastReq][turn]
+| when (nWest == 0 && nEast < N && (nWestReq==0 || turn==EastTurn)) 
+	east[ID].enter -> Bridge[nWest][nEast + 1][nWestReq][nEastReq - 1][WestTurn]
+| when (nEast > 0) 
+	east[ID].exit -> Bridge[nWest][nEast - 1][nWestReq][nEastReq][turn]
+| when (nEast == 0 && nWest < N && (nEastReq==0 || turn==WestTurn)) 
+	west[ID].enter -> Bridge[nWest+1][nEast][nWestReq - 1][nEastReq][EastTurn]
+| when (nWest > 0) 
+	west[ID].exit -> Bridge[nWest-1][nEast][nWestReq][nEastReq][turn]).
 
 ||SingleLane = (Cars || Bridge).
 ||CheckSingleLane = (SingleLane || SingleCarOnBridge).
