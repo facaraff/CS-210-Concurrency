@@ -1,0 +1,5 @@
+TrafficLight = Red,
+Red = (change -> AmberRed),
+AmberRed = (change -> Green),
+Green = (change -> Amber),
+Amber = (change -> Red).

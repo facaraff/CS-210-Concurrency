@@ -1,0 +1,5 @@
+//FSP for a safe cruise control system
+CruiseControl = OFF,  
+OFF = (engineOn -> ON),
+ON = (setSpeed -> CheckSpeed | engineOff -> OFF),
+CheckSpeed = (speed -> CheckSpeed | engineOff -> OFF).

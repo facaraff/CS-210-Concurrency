@@ -1,0 +1,4 @@
+//FSP for a possible cruise control mechanism
+CruiseControl = OFF, //initial state is set to off.
+OFF = (engineOn -> CheckSpeed), //when the engine turns on, it checks the speed and progresses forward.
+CheckSpeed = (speed -> CheckSpeed | engineOff -> OFF). //conditional change of states

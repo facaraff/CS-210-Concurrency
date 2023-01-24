@@ -1,0 +1,5 @@
+// FSP for a toggle switch
+SWITCH = OFF, // process name with intial state
+OFF = (down -> ON), // describtion of OFF process with
+associated action ‘down’
+ON = (up -> OFF). // describtion of ON process with associated action ‘up’
