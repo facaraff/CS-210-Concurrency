@@ -1,0 +1,2 @@
+//a..b is a range from a to b.
+BUFFER = (store[i:0..3] -> read[i] -> BUFF).

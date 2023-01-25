@@ -1,0 +1,4 @@
+BUFFER = ( store[0] -> read[0] -> BUFFER
+       | store[1] -> read[1] -> BUFFER
+       | store[2] -> read[2] -> BUFFER
+       | store[3] -> read[3] -> BUFFER).

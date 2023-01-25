@@ -1,0 +1,15 @@
+THREAD = NEW, // An instance of a thread.
+NEW = (start -> RUNNABLE), // start method makes it runnable (running or ready to be scheduled).
+RUNNABLE = (waitOnLock -> BLOCKED
+          |sleep -> TIMED_WAITING
+          |wait -> TIMED_WAITING
+          |waitonOthers -> WAIT
+          |run -> RUNNABLE
+          |exit -> TERMINATED),
+BLOCKED= (lockAcquired -> RUNNABLE),
+TIMED_WAITING =(timeElapsed -> RUNNABLE
+               |timeElapsed -> BLOCKED),
+
+WAIT = (notify -> RUNNABLE
+      |notify ->BLOCKED),
+TERMINATED = STOP.  //STOP is a special keyword for termination

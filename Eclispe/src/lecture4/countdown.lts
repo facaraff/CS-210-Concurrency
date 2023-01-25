@@ -1,0 +1,5 @@
+const N = 3
+range T = 0.. N
+COUNTDOWN = (start -> COUNTDOWN[N]),
+COUNTDOWN[i:T] = (when i > 0 tick ->
+COUNTDOWN[i-1] | when i == 0 beep -> STOP | stop -> STOP).

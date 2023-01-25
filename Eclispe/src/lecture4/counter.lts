@@ -1,0 +1,2 @@
+COUNTER (N=3) = COUNTER[0],
+COUNTER[i:0..N] = (when (i < N) increment -> COUNTER[i+1] | when (i > 0) decrement -> COUNTER[i-1]).

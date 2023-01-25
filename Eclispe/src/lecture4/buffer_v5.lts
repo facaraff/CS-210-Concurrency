@@ -1,0 +1,1 @@
+BUFF(N=3) = (store[i:0..N] -> read[i] -> BUFF). // N is a parameter 
