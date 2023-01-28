@@ -1,0 +1,1 @@
+PRINTER = (acquire -> print -> release ->PRINTER)\{print}.

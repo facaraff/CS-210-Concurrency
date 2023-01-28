@@ -1,0 +1,3 @@
+USER = (acquire -> use -> release -> USER).
+PRINTER = (acquire -> release -> PRINTER).
+||PRINTER_USER = (a:USER || b:USER || {a,b}::PRINTER).

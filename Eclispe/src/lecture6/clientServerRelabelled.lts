@@ -1,0 +1,3 @@
+CLIENT = (call->wait->continue->CLIENT).
+SERVER = (receive->fetch->reply->SERVER).
+||CLIENT_SERVER = (CLIENT || SERVER).
