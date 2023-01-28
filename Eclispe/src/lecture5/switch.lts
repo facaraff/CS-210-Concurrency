@@ -1,0 +1,3 @@
+
+SWITCH = (on -> off -> SWITCH).
+|| TWO_SWITCH = (a:SWITCH || b::SWITCH).

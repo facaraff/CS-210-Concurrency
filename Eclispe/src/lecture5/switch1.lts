@@ -1,0 +1,2 @@
+SWITCH1 = (on -> off -> SWITCH1).
+|| SWITCH1(N=3) = (forall[i:1..N] s[i]:SWITCH1).

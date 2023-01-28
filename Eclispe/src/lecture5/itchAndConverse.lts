@@ -1,0 +1,6 @@
+//process for itching
+ITCH = (scratch -> STOP).
+// process for conversing.
+CONVERSE = (think -> talk -> listen -> CONVERSE |stop -> STOP). 
+//composition of two processes.
+|| ITCH_CONVERSE = (ITCH || CONVERSE). 
