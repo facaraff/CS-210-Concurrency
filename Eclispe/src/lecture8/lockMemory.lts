@@ -1,0 +1,12 @@
+const N = 2
+range T = 0..N
+
+//Memory process
+MEMORY = MEMORY[0],
+MEMORY[u:T] = (read[u] -> MEMORY[u] | write[v:T] ->MEMORY[v]).
+
+//LOCK
+LOCK = (acquire -> release -> LOCK).
+
+//Lock with Memeory
+LOCKEDMEM = (LOCK || MEMORY).
