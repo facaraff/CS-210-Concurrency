@@ -9,4 +9,4 @@ MEMORY[u:T] = (read[u] -> MEMORY[u] | write[v:T] ->MEMORY[v]).
 LOCK = (acquire -> release -> LOCK).
 
 //Lock with Memeory
-LOCKEDMEM = (LOCK || MEMORY).
+||LOCKEDMEM = (LOCK || MEMORY).
