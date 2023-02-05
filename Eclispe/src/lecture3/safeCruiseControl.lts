@@ -2,4 +2,4 @@
 CruiseControl = OFF,  
 OFF = (engineOn -> ON),
 ON = (setSpeed -> CheckSpeed | engineOff -> OFF),
-CheckSpeed = (speed -> CheckSpeed | engineOff -> OFF).
+CheckSpeed = (speed -> CheckSpeed | exitCruiseControl -> ON).

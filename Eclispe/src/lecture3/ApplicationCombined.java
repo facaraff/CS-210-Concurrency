@@ -1,6 +1,6 @@
 package lecture3;
 
-// tha main application
+// the main application (using both Thread and Runnable instances)
 public class ApplicationCombined
 {
   // it throws InterruptedException to properly shut down Threads.
@@ -14,7 +14,7 @@ public class ApplicationCombined
     togglerRunnable.start();
     togglerThread.start();
     // the main thread sleeps while switch keeps going
-    Thread.sleep(5000); // for 5 secs
+    Thread.sleep(5000); // for 5 seconds
     // stopping the other thread
     togglerRunnable.interrupt();
     togglerRunnable.join();
