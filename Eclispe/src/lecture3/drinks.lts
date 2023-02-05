@@ -1,1 +1,1 @@
-DRINKS = (red -> cofee -> DRINKS | blue -> tea -> Drinks).
+DRINKS = (red -> cofee -> DRINKS | blue -> tea -> DRINKS).
