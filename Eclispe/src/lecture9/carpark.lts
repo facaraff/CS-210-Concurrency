@@ -1,0 +1,8 @@
+Controller(Capacity=4) = Spaces[Capacity],
+Spaces[spacesLeft:0..Capacity] = (when spacesLeft>0 enter -> Spaces[spacesLeft-1] | when spacesLeft<Capacity leave -> Spaces[spacesLeft+1]).
+
+Exit = (leave -> Exit).
+
+Entrance = (enter -> Entrance).
+
+||CarPark = (Entrance || Controller || Exit).
