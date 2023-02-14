@@ -1,4 +1,6 @@
 package lecture6;
+
+
 public class Turnstile implements Runnable{
     private Counter people;
 
