@@ -8,7 +8,7 @@
  * I suggest using semaphores where the methods are coordinated in the same thread.
  * 
  * */
-package lecture10.carparkWithSemaphore;
+package lecture10.carParkWithSemaphore;
 
 import lecture9.Controller;
 

@@ -1,4 +1,4 @@
-package lecture10.carparkWithSemaphore;
+package lecture10.carParkWithSemaphore;
 
 import lecture9.Entrance;
 import lecture9.Exit;

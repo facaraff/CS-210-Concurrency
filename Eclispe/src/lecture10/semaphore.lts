@@ -1,0 +1,4 @@
+const N = 3
+range R = 0..N
+Semaphore(Capacity=N) = Semaphore[Capacity],
+Semaphore[n:R] = (when n>0 down -> Semaphore[n-1] | up -> Semaphore[n+1]).
