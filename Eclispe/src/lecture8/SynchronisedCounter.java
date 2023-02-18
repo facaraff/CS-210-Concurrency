@@ -1,4 +1,4 @@
-package lecture7;
+package lecture8;
 
 import lecture6.Counter;
 import lecture6.Simulate;

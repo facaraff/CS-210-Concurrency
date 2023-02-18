@@ -1,8 +1,10 @@
-package lecture6;
+package lecture7;
 import java.util.Scanner;
 
+import lecture6.Garden;
 
-public class Application {
+
+public class NonSynchonisedGardenApplication {
 
     public static void main(String[] args) {
         Garden garden;
