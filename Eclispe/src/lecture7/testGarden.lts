@@ -15,7 +15,20 @@ go/{east, west}.go, east.return/east.read[N],west.return/west.read[N]}).
 
 //Garden process (fisrt version)
 //||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east,west}::MEMORY)
-const A = 2*N-1 // if both processes performed all writes then at most we get A writes
-range D = 0..A TEST = TEST[0],
-TEST[v:D] = ({east,west}.write[u:1..N] -> TEST[v+1] | reset -> TEST[0] | when (v>N) wrong -> ERROR).
+
+//TEST
+range R = 0..N+1 //N + 1 states to capture the error!
+TEST = TEST[0],
+TEST[v:R] = (when (v<=N) {east,west}.write[u:1..v+1] -> TEST[v+1] | when(v <= N)  reset -> TEST[0] | when (v>N) wrong -> ERROR).
+
 ||TESTGARDEN = (GARDEN || TEST).
+
+/*
+Note that, as explained in the lecture, ERROR sates are automatically generate. So, you sould simplify the above test with the FSP code below:
+
+TEST = TEST[0],
+TEST[v:T] = ({east,west}.write[u:1..v+1] -> TEST[v+1] |  when(v <= N)  reset -> TEST[0]).
+
+||TESTGARDEN = (GARDEN || TEST).
+
+*/
