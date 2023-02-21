@@ -1,28 +1,25 @@
 const N = 2
+const A = N+1 
 range T = 0..N
+range D = 0..A
 
-//Memory process
-MEMORY = MEMORY[0],
-MEMORY[u:T] = (read[u] -> MEMORY[u] | write[v:T] ->MEMORY[v]).
-//LOCK
+MEMORY      = MEMORY[0],
+MEMORY[u:T] = (read[u] -> MEMORY[u] 
+           |write[v:T] -> MEMORY[v]).
+
 LOCK = (acquire -> release -> LOCK).
 
-//Lock with Memeory
 ||LOCKEDMEM = (LOCK || MEMORY).
 
-//Turnistel process
 TURNSTILE = (go -> write[0] -> RUN),
 RUN = (return -> TURNSTILE | acquire -> CRITICAL),
-//CRITICAL is the part protected by lock
 CRITICAL = (arrive -> INCREMENT | release -> RUN),
-INCREMENT = (read[v:0..N-1] -> write[v+1] -> CRITICAL |
-read[N] -> CRITICAL).
+INCREMENT = (read[v:0..N-1] -> write[v+1] -> CRITICAL | read[N] -> CRITICAL).
 
-//Garden process
-||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east,west}::LOCKEDMEM) /{reset/{east, west}.write[0], go/{east, west}.go}.
+||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east, west}::LOCKEDMEM)
+			/{reset/{east, west}.write[0], 
+			go/{east, west}.go}.
 
-//TEST
-const A = 2*N -1 // if both processes performed all writes then at most we get A writes
-range D = 0..A TEST = TEST[0],
-TEST[v:D] = ({east,west}.write[u:1..N] -> TEST[v+1] | reset -> TEST[0] | when (v>N) wrong -> ERROR).
+TEST = TEST[0],
+TEST[v:D] = ({east, west}.write[u:1..N] -> TEST[v+1] | reset -> TEST[0] | when v > N wrong -> ERROR).
 ||TESTGARDEN = (GARDEN || TEST).
