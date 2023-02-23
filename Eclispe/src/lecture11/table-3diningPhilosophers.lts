@@ -1,0 +1,12 @@
+//A table process for a 3 dining philosopher scenario
+Fork = (acquire -> release -> Fork).
+
+Philosopher = (sit -> right.acquire -> left.acquire -> eat -> left.release -> right.release -> stand -> Philosopher).
+
+||ThreePhil = ({a,b,c}:Philosopher).
+
+||Fork1 = ({a.right, b.left}::Fork).
+||Fork2 = ({b.right, c.left}::Fork).
+||Fork3 = ({c.right, a.left}::Fork).
+
+||Table = (ThreePhil || Fork1 || Fork2 || Fork3).
