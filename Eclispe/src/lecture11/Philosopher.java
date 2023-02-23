@@ -1,19 +1,18 @@
-package lecture12;
+package lecture11;
 
-import java.util.concurrent.Semaphore;
 
 public class Philosopher implements Runnable {
     private Fork leftFork;
     private Fork rightFork;
-    private Semaphore butler;
     private String name;
     private double scaler = 1000;
-    Philosopher(String name, Fork left, Fork right, Semaphore butler){
+   
+    public Philosopher(String name, Fork left, Fork right){
         this.name = name;
         leftFork = left;
         rightFork = right;
-        this.butler = butler;
     }
+    
     public void setLeftFork(Fork leftFork) {
         this.leftFork = leftFork;
     }
@@ -22,7 +21,6 @@ public class Philosopher implements Runnable {
     }
     public void sit() 
             throws InterruptedException{
-        butler.acquire(); // acquire permit
         double random = Math.random();
         System.out.println(name + " is trying to sit down.");
         Thread.sleep((long) (random*scaler));
@@ -37,7 +35,6 @@ public class Philosopher implements Runnable {
     }
     private void stand(){
         System.out.println(name + " has stood up.");
-        butler.release(); // release permit
     }
     @Override
     public void run() {
