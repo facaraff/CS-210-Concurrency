@@ -1,0 +1,16 @@
+Entrance = (enter -> Entrance).
+
+Exit = (leave -> Exit).
+
+Controller(Capacity=4) = Spaces[Capacity],
+Spaces[spaceLeft:0..Capacity] = (//when spaceLeft>0
+enter -> Spaces[spaceLeft-1] | //when spaceLeft<Capacity
+leave -> Spaces[spaceLeft+1]).
+
+||CarPark = (Entrance || Controller || Exit).
+
+// Property for checking the number of total cars
+property TotalCars = TotalCars[0],
+TotalCars[i:0..4] = (enter -> TotalCars[i+1] | leave -> TotalCars[i-1]).
+
+||TestCarCount = (CarPark || TotalCars).
