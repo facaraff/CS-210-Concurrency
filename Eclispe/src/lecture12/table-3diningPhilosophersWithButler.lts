@@ -1,0 +1,21 @@
+//A table process for a 3 dining philosopher scenario with butler
+Fork = (acquire -> release -> Fork).
+
+Philosopher = (sit -> right.acquire -> left.acquire -> eat -> left.release -> right.release -> stand -> Philosopher).
+
+||ThreePhil = ({a,b,c}:Philosopher).
+
+||Fork1 = ({a.right, b.left}::Fork).
+||Fork2 = ({b.right, c.left}::Fork).
+||Fork3 = ({c.right, a.left}::Fork).
+
+||Table = (ThreePhil || Fork1 || Fork2 || Fork3).
+
+
+const N = 3 //N must be an odd number!
+set Names = {a,b,c}
+
+Butler(Capacity=N-1) = ChairFull[0], 
+ChairFull[i:0..Capacity] = (when i<Capacity Names.sit -> ChairFull[i+1] | when i>0 Names.stand -> ChairFull[i-1]).
+
+||ButleredTable = (Butler || Table).

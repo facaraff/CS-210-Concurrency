@@ -1,8 +1,7 @@
-const N = 3
+const N = 3 //N must be an odd number!
 set Names = {a,b,c}
 
-Butler(Capacity=2) = ChairFull[0],
-ChairFull[i:0..Capacity] = (when i<Capacity Names.sit -> ChairFull[i+1] 
-						   |when i>0 Names.stand -> ChairFull[i-1]).
-						   
+Butler(Capacity=N-1) = ChairFull[0], 
+ChairFull[i:0..Capacity] = (when i<Capacity Names.sit -> ChairFull[i+1] | when i>0 Names.stand -> ChairFull[i-1]).
+
 ||ButleredTable = (Butler || Table).
