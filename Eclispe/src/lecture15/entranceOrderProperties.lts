@@ -1,6 +1,6 @@
 const N = 2
 range T = 0..N
-range ID = 1..N// lower ID is for the first car on the queue.
+range ID = 1..N// lower ID is for the first car.
 
 Car = (enter -> exit -> STOP).
 

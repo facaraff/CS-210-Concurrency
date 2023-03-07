@@ -1,18 +1,16 @@
 const N = 2
 range T = 0..N
-range ID = 1..N// lower ID is for the first car.
+range ID = 1..N// lower ID is for the first car on the queue.
 
 Car = (enter -> exit -> STOP).
-
-||Convoy = ([ID]:Car).// composing multiple cars with IDs.
 
 Entrance = Entrance[1],
 Entrance[i:ID] = ([i].enter -> Entrance[i%N+1]).
 Exit = Exit[1],
 Exit[i:ID] = ([i].exit -> Exit[i%N+1]).
 
-
-||FixedConvoy = (Convoy || Entrance || Exit).
+//Same as before, but we fixed the convoy
+||FixedConvoy = ([ID]:Car || Entrance || Exit).
 
 property EntranceOrder = EntranceOrder[1],
 EntranceOrder[id:ID] = ([id].enter -> EntranceOrder[id%N+1]).
@@ -20,6 +18,7 @@ EntranceOrder[id:ID] = ([id].enter -> EntranceOrder[id%N+1]).
 property ExitOrder = ExitOrder[1],
 ExitOrder[id:ID] = ([id].exit -> ExitOrder[id%N+1]).
 
+//Same as before, but we perform the check with the fixed convoy
 ||CheckFixedConvoy = (FixedConvoy || EntranceOrder || ExitOrder). // for checking the propertie.
 
 ||Cars = ({west, east}:FixedConvoy). // creating the Cars.
@@ -34,3 +33,12 @@ CountEast[i:ID] = (east[ID].enter->CountEast[i+1]
 				   | when i==1 east[ID].exit->CarsFromOneDirection).
 
 ||CheckCars = (Cars || CarsFromOneDirection).
+
+Bridge = Bridge[0][0],
+Bridge[nWest:T][nEast:T] = ( when (nWest==0 && nEast<N) east[ID].enter -> Brige[nWest][nEast+1]
+						   | when nEast>0 east[ID].exit -> Bridge[nWeast][nEast-1]
+						   | when (nEast==0 && nWest<N) west[ID].enter -> Brige[nWest+1][nEast]
+ 						   | when nWest>0 west[ID].exit -> Bridge[nWest-1][nEast]).
+ 						   
+ ||SingleLaneBridge = (Cars || Bridge).
+ ||CheckSingleLaneBridge = (SingleLaneBridge || CarsFromOneDirection).
