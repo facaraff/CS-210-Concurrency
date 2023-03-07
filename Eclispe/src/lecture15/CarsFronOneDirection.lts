@@ -1,0 +1,35 @@
+const N = 2
+range T = 0..N
+range ID = 1..N// lower ID is for the first car on the queue.
+
+Car = (enter -> exit -> STOP).
+
+Entrance = Entrance[1],
+Entrance[i:ID] = ([i].enter -> Entrance[i%N+1]).
+Exit = Exit[1],
+Exit[i:ID] = ([i].exit -> Exit[i%N+1]).
+
+//Same as before, but we fixed the convoy
+||FixedConvoy = ([ID]:Car || Entrance || Exit).
+
+property EntranceOrder = EntranceOrder[1],
+EntranceOrder[id:ID] = ([id].enter -> EntranceOrder[id%N+1]).
+
+property ExitOrder = ExitOrder[1],
+ExitOrder[id:ID] = ([id].exit -> ExitOrder[id%N+1]).
+
+//Same as before, but we perform the check with the fixed convoy
+||CheckFixedConvoy = (FixedConvoy || EntranceOrder || ExitOrder). // for checking the propertie.
+
+||Cars = ({west, east}:FixedConvoy). // creating the Cars.
+
+//Property for checking that cars are coming only from one direction
+property CarsFromOneDirection = (west[ID].enter->CountWest[1] | east[ID].enter->CountEast[1]),
+CountWest[i:ID] = (west[ID].enter->CountWest[i+1]
+				   | when i>1 west[ID].exit->CountWest[i-1]
+				   | when i==1 west[ID].exit->CarsFromOneDirection),
+CountEast[i:ID] = (east[ID].enter->CountEast[i+1]
+				   | when i>1 east[ID].exit->CountEast[i-1]
+				   | when i==1 east[ID].exit->CarsFromOneDirection).
+
+||CheckCars = (Cars || CarsFromOneDirection).

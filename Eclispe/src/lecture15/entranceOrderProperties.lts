@@ -1,0 +1,15 @@
+const N = 2
+range T = 0..N
+range ID = 1..N// lower ID is for the first car on the queue.
+
+Car = (enter -> exit -> STOP).
+
+||Convoy = ([ID]:Car).// composing multiple cars with IDs.
+
+property EntranceOrder = EntranceOrder[1],
+EntranceOrder[id:ID] = ([id].enter -> EntranceOrder[id%N+1]).
+
+property ExitOrder = ExitOrder[1],
+ExitOrder[id:ID] = ([id].exit -> ExitOrder[id%N+1]).
+
+||CheckConvoy = (Convoy || EntranceOrder || ExitOrder).
