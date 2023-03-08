@@ -11,34 +11,36 @@ property ExitOrder = ExitOrder[1],
 ExitOrder[id:ID] = ([id].exit -> ExitOrder[id%N+1]).
 
 ||Convoy = ([ID]:Car).
-
 ||CheckConvoy = (Convoy || EntranceOrder || ExitOrder).
 
 Entrance = Entrance[1],
 Entrance[i:ID] = ([i].enter -> Entrance[i%N+1]).
 Exit = Exit[1],
 Exit[i:ID] = ([i].exit -> Exit[i%N+1]).
-||FixedConvoy = ([ID]:Car || Entrance || Exit).
+
+||FixedConvoy = (Convoy || Entrance || Exit).
 ||CheckFixedConvoy = (FixedConvoy || EntranceOrder || ExitOrder).
+
 ||Cars = ({west, east}:FixedConvoy).
 
-property SingleCarOnBridge = (west[ID].enter -> CountWest[1]
-							| east[ID].enter -> CountEast[1]),
-CountWest[i:ID] = (west[ID].enter -> CountWest[i+1]
-					| when i>1 west[ID].exit -> CountWest[i-1]
-					| when i==1 west[ID].exit -> SingleCarOnBridge),
-CountEast[i:ID] = (east[ID].enter -> CountEast[i+1]
-					| when i>1 east[ID].exit -> CountEast[i-1]
-					| when i==1 east[ID].exit -> SingleCarOnBridge).
-||CheckCars = (Cars||SingleCarOnBridge).
+
+property CarsFromOneDirection = (west[ID].enter->CountWest[1] | east[ID].enter->CountEast[1]),
+CountWest[i:ID] = (west[ID].enter->CountWest[i+1]
+				   | when i>1 west[ID].exit->CountWest[i-1]
+				   | when i==1 west[ID].exit->CarsFromOneDirection),
+CountEast[i:ID] = (east[ID].enter->CountEast[i+1]
+				   | when i>1 east[ID].exit->CountEast[i-1]
+				   | when i==1 east[ID].exit->CarsFromOneDirection).
+
+||CheckCars = (Cars || CarsFromOneDirection).
+
 
 Bridge = Bridge[0][0],
-Bridge[nWest:T][nEast:T] = (
-when (nWest == 0 && nEast<N) east[ID].enter -> Bridge[nWest][nEast + 1]
-| when (nEast>0) east[ID].exit -> Bridge[nWest][nEast - 1]
-| when (nEast==0 && nWest<N) west[ID].enter -> Bridge[nWest+1][nEast]
-| when (nWest>0) west[ID].exit -> Bridge[nWest-1][nEast]
-).
+Bridge[nWest:T][nEast:T] = (when (nWest == 0 && nEast<N) east[ID].enter -> Bridge[nWest][nEast + 1]
+						   |when (nEast>0) east[ID].exit -> Bridge[nWest][nEast - 1]
+						   |when (nEast==0 && nWest<N) west[ID].enter -> Bridge[nWest+1][nEast]
+						   |when (nWest>0) west[ID].exit -> Bridge[nWest-1][nEast]).
+
 
 ||SingleLaneBridge = (Cars || Bridge).
-||CheckSingleLane = (SingleLaneBridge || SingleCarOnBridge).
+||CheckSingleLane = (SingleLaneBridge || CarsFromOneDirection).
