@@ -1,0 +1,9 @@
+//What if we put a FairCoin and an UnfairCoin together?
+TwoCoin = (pick -> FairCoin | pick -> UnfairCoin),
+FairCoin = (toss -> heads -> FairCoin | toss -> tails -> FairCoin),
+UnfairCoin = (toss -> heads -> UnfairCoin).
+
+
+progress Heads = {heads}
+progress Tails = {tails}
+progress HeadsOrTails = {heads, tails}

@@ -1,0 +1,9 @@
+//a simple coin process that produces heads or tails
+FairCoin = (toss -> heads -> FairCoin | toss -> tails -> FairCoin). 
+
+//testsing that heads can occur infinitely many times
+progress Heads = {heads} 
+//testsing that tails can occur infinitely many times
+progress Tails = {tails} 
+//teststing that at least one of the heads or tails occurs (infinitely) many times
+progress HeadsOrTails = {heads, tails}
