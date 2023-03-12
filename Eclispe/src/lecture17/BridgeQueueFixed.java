@@ -25,8 +25,7 @@ public class BridgeQueueFixed {
         eastWaitCount = 0;
         isWestTurn = true;
     }
-    public synchronized void westEnter() 
-            throws InterruptedException{
+    public synchronized void westEnter() throws InterruptedException{
         westWaitCount += 1;
         while (eastCount > 0 || (eastWaitCount>0 && !isWestTurn))
                 wait();
@@ -43,8 +42,7 @@ public class BridgeQueueFixed {
         isWestTurn = false; // let east use the bridge
         notifyAll();
     }
-    public synchronized void eastEnter() 
-            throws InterruptedException{
+    public synchronized void eastEnter() throws InterruptedException{
         eastWaitCount += 1;
         while (westCount > 0 || (westWaitCount>0 && isWestTurn))
                 wait();

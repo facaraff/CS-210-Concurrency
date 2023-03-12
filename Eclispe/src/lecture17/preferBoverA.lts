@@ -1,6 +1,6 @@
 FairCoin = (tossA -> heads -> FairCoin | tossB -> tails -> FairCoin).
 
-||TestPriority = FairCoin >> {tossA}. //prefer tossA over tossB
+||TestPriority = FairCoin >> {tossA}. //prefer tossB over tossA
 
 progress Heads = {heads}
 progress Tails = {tails}
