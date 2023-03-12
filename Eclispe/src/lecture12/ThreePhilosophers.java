@@ -22,7 +22,7 @@ public class ThreePhilosophers {
             int leftForkInd = i;
             int rightForkInd = (i+1)%forkSet.length;
             
-            // this if block is used to break the wait-for-cycle condition
+            // this block is used to break the wait-for-cycle condition
             if (i%2 != 0){
                 // flip the fork allocation
                 leftForkInd = (i+1)%forkSet.length;

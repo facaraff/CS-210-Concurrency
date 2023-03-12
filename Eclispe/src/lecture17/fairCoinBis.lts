@@ -1,0 +1,6 @@
+//Alternative model for the the fair coin process where tossing actions are differentiated
+FairCoin = (tossA -> heads -> FairCoin | tossB -> tails -> FairCoin).
+
+progress Heads = {heads}
+progress Tails = {tails}
+progress HeadsOrTails = {heads, tails}

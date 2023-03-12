@@ -1,10 +1,11 @@
-package lecture15;
+package lecture17;
 
 public class SingleLaneBridge {
+
  
    public static void main(String[] args) throws InterruptedException {
 	   
-        BridgeQueue bridge = new BridgeQueue();
+        BridgeQueueFixed bridge = new BridgeQueueFixed();
         
         WestCar westCarA = new WestCar("WA", bridge);
         WestCar westCarB = new WestCar("WB", bridge);
