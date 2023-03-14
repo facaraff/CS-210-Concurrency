@@ -1,29 +1,29 @@
-package lecture18;
+package lecture18.nonSTMAccount;
 
-public class Transactions implements Runnable{
+public class TransactionsNonSTM implements Runnable{
     
-	private Account[] accounts;
+	private AccountNonSTM[] accounts;
     
-    Transactions(Account[] accounts){
+    public TransactionsNonSTM(AccountNonSTM[] accounts){
         this.accounts = accounts;
     }
     
     @Override
     public void run() {
         for(int i =0; i<10; i++) {
-            accounts[0].atomicTransfer(accounts[1], 5);
+            accounts[0].transfer(accounts[1], 5);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            accounts[1].atomicTransfer(accounts[2], 5);
+            accounts[1].transfer(accounts[2], 5);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            accounts[2].atomicTransfer(accounts[0], 5);
+            accounts[2].transfer(accounts[0], 5);
         }
     }
 }

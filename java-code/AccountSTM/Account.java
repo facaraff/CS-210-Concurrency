@@ -1,11 +1,7 @@
-package lecture18;
-
 import org.multiverse.api.references.*;
 import org.multiverse.api.StmUtils;
-
 public class Account {
     private TxnDouble balance;
-    
     Account(double initBalance){
         balance = StmUtils.newTxnDouble(initBalance);
     }

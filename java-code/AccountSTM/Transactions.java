@@ -1,13 +1,8 @@
-package lecture18;
-
 public class Transactions implements Runnable{
-    
-	private Account[] accounts;
-    
+    private Account[] accounts;
     Transactions(Account[] accounts){
         this.accounts = accounts;
     }
-    
     @Override
     public void run() {
         for(int i =0; i<10; i++) {
