@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_351">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/CS-210-Concurrency/MISC/multiverse-core-0.7.0.jar">
+	<classpathentry kind="lib" path="C:/Users/fabio.caraffini/git/CS-210-Concurrency/MISC/multiverse-core-0.7.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
