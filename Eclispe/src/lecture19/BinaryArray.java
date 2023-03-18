@@ -1,6 +1,5 @@
 package lecture19;
 
-//import java.util.Date;
 import org.multiverse.api.StmUtils;
 import org.multiverse.api.references.*;
 
@@ -8,7 +7,7 @@ import org.multiverse.api.references.*;
 public class BinaryArray {
 	
 	private TxnBoolean[] array;
-	//private TxnRef<Date> lastModified;
+	
 	private int length;
 	
 	BinaryArray(int length){
@@ -16,7 +15,6 @@ public class BinaryArray {
 		this.array = new TxnBoolean[length];
 		for(int i=0; i<length; i++)
 			array[i] = StmUtils.newTxnBoolean(false);
-		//this.lastModified = StmUtils.newTxnRef(new Date());
 	}
 	
 	public int getLength(){
@@ -48,6 +46,5 @@ public class BinaryArray {
 		boolean currentDest = destination.getStateAtIndex(destId);
 		setStateAtIndex(originId, currentDest);
 		destination.setStateAtIndex(destId, currentOrig);
-		//System.out.println(lastModified);
 	}
 }

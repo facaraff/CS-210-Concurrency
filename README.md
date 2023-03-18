@@ -3,7 +3,7 @@
 This is a repository for code and supporting materials for a course on Concurrency at Swansea University. 
 
 
-#### Languages:
+##### Languages:
 Java <br>
-FSP
+FSP -- [Finite State Process](https://www.doc.ic.ac.uk/~jnm/LTSdocumention/FSP-notation.html)
 
