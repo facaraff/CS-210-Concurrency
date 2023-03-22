@@ -12,3 +12,5 @@ Cycle[i:0..2] = ( when i==0 wash -> Cycle[i+1]
 Paused[i:0..2] = (resume[i] -> Cycle[i]).
 
 property CycleProperty = (wash -> rinse -> dry -> CycleProperty).
+
+||CheckCycle = (Machine || CycleProperty).
