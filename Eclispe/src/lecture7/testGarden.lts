@@ -4,31 +4,29 @@ range T = 0..N
 MEMORY = MEMORY[0],
 MEMORY[u:T] = (read[u] -> MEMORY[u] | write[v:T] ->MEMORY[v]).
 
-//Turnistel process
+//Turnstile process
 TURNSTILE = (go -> write[0] -> RUN),
 RUN = (arrive -> INCREMENT),
 INCREMENT = (read[v:0..N-1] -> write[v+1] -> RUN | read[N] -> TURNSTILE).
 
-//Garden process
-||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east, west}::MEMORY/{reset/{east, west}.write[0],
-go/{east, west}.go, east.return/east.read[N],west.return/west.read[N]}).
-
 //Garden process (first version)
 //||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east,west}::MEMORY)
 
-//TEST
-range R = 0..N+1 //N + 1 states to capture the error!
-TEST = TEST[0],
-TEST[v:R] = ({east,west}.write[u:T] -> TEST[v+1] |  reset -> TEST[0] | when v>N wrong -> ERROR).
+//Garden process
+||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east, west}::MEMORY)/{reset/{east, west}.write[0],
+go/{east, west}.go, east.return/east.read[N],west.return/west.read[N]}.
 
-||TESTGARDEN = (GARDEN || TEST).
 
 /*
-Note that, as explained in the lecture, ERROR sates can be automatically generated.
-
+//TEST WITH ERROR STATE
 TEST = TEST[0],
-TEST[v:T] = ({east,west}.write[u:1..N] -> TEST[v+1] |   reset -> TEST[0]).
+TEST[i:T] = ({east,west}.write[i+1] -> TEST[i+1] | when i==N wrong -> ERROR | reset -> TEST[0] ).
 
 ||TESTGARDEN = (GARDEN || TEST).
-
 */
+
+//TEST
+TEST = TEST[0],
+TEST[i:T] = ({east,west}.write[i+1] -> TEST[i+1] | reset -> TEST[0] ).
+
+||TESTGARDEN = (GARDEN || TEST).
