@@ -1,11 +1,8 @@
 const N = 2
-const A = N+1 
 range T = 0..N
-range D = 0..A
 
 MEMORY      = MEMORY[0],
-MEMORY[u:T] = (read[u] -> MEMORY[u] 
-           |write[v:T] -> MEMORY[v]).
+MEMORY[u:T] = (read[u] -> MEMORY[u] |write[v:T] -> MEMORY[v]).
 
 LOCK = (acquire -> release -> LOCK).
 
@@ -16,10 +13,8 @@ RUN = (return -> TURNSTILE | acquire -> CRITICAL),
 CRITICAL = (arrive -> INCREMENT | release -> RUN),
 INCREMENT = (read[v:0..N-1] -> write[v+1] -> CRITICAL | read[N] -> CRITICAL).
 
-||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east, west}::LOCKEDMEM)
-			/{reset/{east, west}.write[0], 
-			go/{east, west}.go}.
+||GARDEN = (east:TURNSTILE || west:TURNSTILE || {east, west}::LOCKEDMEM)/{reset/{east, west}.write[0],go/{east, west}.go, east.return/east.read[N],west.return/west.read[N]}.
 
 TEST = TEST[0],
-TEST[v:D] = ({east, west}.write[u:1..N] -> TEST[v+1] | reset -> TEST[0] | when v > N wrong -> ERROR).
+TEST[v:T] = ({east, west}.write[u:1..N] -> TEST[v+1] | reset -> TEST[0] | when v > N wrong -> ERROR).
 ||TESTGARDEN = (GARDEN || TEST).
