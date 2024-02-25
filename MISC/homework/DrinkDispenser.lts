@@ -1,0 +1,7 @@
+DrinkDispenser = (insert[5]->Five | insert[10]->Ten | insert[20]->Twenty),
+Five = (insert[5]->Ten | insert[10]->Fifteen | insert[20]->TwentyFive),
+Ten = (insert[5]->Fifteen | insert[10]->Twenty | insert[20]->Thirty),
+Fifteen = (dispenceCola->DrinkDispenser),
+Twenty = (return[5]->Fifteen),
+TwentyFive = (return[5]->Twenty | return[10]->Fifteen),
+Thirty = (return[5]->TwentyFive | return[10]->Twenty).
